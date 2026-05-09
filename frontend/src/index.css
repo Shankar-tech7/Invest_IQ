@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-blue: #ff003c;
+  --color-neon-purple: #0088ff;
+  --color-dark-bg: #000000;
+  --color-dark-card: #0a0a0a;
+  --color-dark-border: #171717;
+}
+
+body {
+  @apply bg-[#000000] text-slate-200 antialiased;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  @apply bg-[#0a0a0a]/60 backdrop-blur-md border border-[#171717] shadow-xl;
+}
+
+/* Neon glow utilities */
+.neon-text-primary {
+  text-shadow: 0 0 10px rgba(255, 0, 60, 0.7);
+}
+
+.neon-border-primary {
+  box-shadow: 0 0 10px rgba(255, 0, 60, 0.4), inset 0 0 10px rgba(255, 0, 60, 0.1);
+  border-color: #ff003c;
+}
+
+/* Custom Scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #000000; 
+}
+::-webkit-scrollbar-thumb {
+  background: #171717; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #262626; 
+}
