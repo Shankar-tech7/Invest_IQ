@@ -20,61 +20,31 @@ const users = {
     specialization: "Digital Surveillance",
     avatar:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face"
-  },
-
-  agent99: {
-    name: "Agent 99",
-    rank: "Field Operations Commander",
-    badge: "IQ-9921",
-    division: "Tactical Response Unit",
-    email: "agent99@investiq.gov",
-    specialization: "Field Reconnaissance",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face"
   }
 
 };
 
-const settings = {
+let settings = {
+
   notifications: true,
   darkMode: true,
   biometricLogin: false
-};
 
-/* GET PROFILE */
+};
 
 exports.getProfile = (req, res) => {
 
   const username =
     req.query.username?.toLowerCase();
 
-  const user = users[username];
+  res.json(users[username]);
 
-  if (!user) {
-
-    return res.status(404).json({
-      message: "User not found"
-    });
-
-  }
-
-  res.json(user);
 };
-
-/* UPDATE PROFILE */
 
 exports.updateProfile = (req, res) => {
 
   const username =
     req.query.username?.toLowerCase();
-
-  if (!users[username]) {
-
-    return res.status(404).json({
-      message: "User not found"
-    });
-
-  }
 
   users[username] = {
     ...users[username],
@@ -85,23 +55,25 @@ exports.updateProfile = (req, res) => {
     success: true,
     profile: users[username]
   });
-};
 
-/* GET SETTINGS */
+};
 
 exports.getSettings = (req, res) => {
 
   res.json(settings);
-};
 
-/* UPDATE SETTINGS */
+};
 
 exports.updateSettings = (req, res) => {
 
-  Object.assign(settings, req.body);
+  settings = {
+    ...settings,
+    ...req.body
+  };
 
   res.json({
     success: true,
     settings
   });
+
 };

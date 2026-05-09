@@ -1,89 +1,71 @@
 const users = {
+
   agent47: {
-    name: "Agent 47",
-    rank: "Lead Forensic Investigator",
-    badge: "IQ-4721",
-    division: "Alpha Forensics Unit",
-    email: "agent47@investiq.gov",
-    specialization: "Temporal Reconstruction",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+    password: "forensics2026",
+    user: {
+      name: "Agent 47",
+      rank: "Lead Investigator"
+    }
   },
 
   agent46: {
-    name: "Agent 46",
-    rank: "Cyber Crime Specialist",
-    badge: "IQ-4621",
-    division: "Cyber Intelligence Unit",
-    email: "agent46@investiq.gov",
-    specialization: "Digital Surveillance",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face"
+    password: "cyber462026",
+    user: {
+      name: "Agent 46",
+      rank: "Cyber Crime Specialist"
+    }
   },
 
   agent99: {
-    name: "Agent 99",
-    rank: "Field Operations Commander",
-    badge: "IQ-9921",
-    division: "Tactical Response Unit",
-    email: "agent99@investiq.gov",
-    specialization: "Field Reconnaissance",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face"
+    password: "tactical992026",
+    user: {
+      name: "Agent 99",
+      rank: "Field Commander"
+    }
   }
+
 };
 
-exports.getProfile = (req, res) => {
+exports.login = (req, res) => {
 
   const username =
-    req.query.username?.toLowerCase();
+    req.body.username?.trim().toLowerCase();
 
-  const user = users[username];
+  const password =
+    req.body.password?.trim();
 
-  if (!user) {
-    return res.status(404).json({
-      message: "User not found"
+  const account = users[username];
+
+  if (!account) {
+
+    return res.status(401).json({
+      success: false,
+      message: "Invalid username"
     });
+
   }
 
-  res.json(user);
-};
+  if (account.password !== password) {
 
-exports.updateProfile = (req, res) => {
-
-  const username =
-    req.query.username?.toLowerCase();
-
-  if (!users[username]) {
-    return res.status(404).json({
-      message: "User not found"
+    return res.status(401).json({
+      success: false,
+      message: "Invalid password"
     });
+
   }
 
-  users[username] = {
-    ...users[username],
-    ...req.body
-  };
-
   res.json({
-    message: "Profile updated successfully",
-    profile: users[username]
+    success: true,
+    message: "Authentication successful",
+    user: account.user
   });
 };
 
-exports.getSettings = (req, res) => {
+exports.logout = (req, res) => {
 
   res.json({
-    notifications: true,
-    darkMode: true,
-    biometricLogin: false
+    success: true,
+    message: "Logout successful"
   });
-};
 
-exports.updateSettings = (req, res) => {
-
-  res.json({
-    message: "Settings updated successfully",
-    settings: req.body
-  });
 };
