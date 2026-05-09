@@ -230,9 +230,7 @@ function AnimatedRoutes({
 
 export default function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("investiq_user")
-  );
+const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("investiq_user")) || null
