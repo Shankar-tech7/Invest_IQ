@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -68,12 +69,14 @@ function PageWrapper({ children }) {
   );
 }
 
-function Layout({ children }) {
+function Layout({ children, setIsLoggedIn }) {
   return (
     <div className="flex h-screen overflow-hidden text-slate-200 relative z-10">
-      <Sidebar />
+
+      <Sidebar setIsLoggedIn={setIsLoggedIn} />
 
       <div className="flex-1 flex flex-col relative bg-transparent">
+
         <Header />
 
         <main className="flex-1 overflow-y-auto p-6 bg-transparent">
@@ -81,18 +84,25 @@ function Layout({ children }) {
         </main>
 
         <ChatbotWidget />
+
       </div>
     </div>
   );
 }
 
-function AnimatedRoutes({ isLoggedIn, onLogin }) {
+function AnimatedRoutes({
+  isLoggedIn,
+  onLogin,
+  setIsLoggedIn
+}) {
+
   const location = useLocation();
 
   // LOGIN ROUTES
   if (!isLoggedIn) {
     return (
       <Routes location={location} key="auth">
+
         <Route
           path="/login"
           element={<LoginPage onLogin={onLogin} />}
@@ -102,6 +112,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
           path="*"
           element={<Navigate to="/login" replace />}
         />
+
       </Routes>
     );
   }
@@ -109,6 +120,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
   // APP ROUTES
   return (
     <AnimatePresence mode="wait">
+
       <Routes location={location} key={location.pathname}>
 
         <Route
@@ -123,7 +135,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
         <Route
           path="/dashboard"
           element={
-            <Layout>
+            <Layout setIsLoggedIn={setIsLoggedIn}>
               <PageWrapper>
                 <DashboardPage />
               </PageWrapper>
@@ -134,7 +146,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
         <Route
           path="/autopsy"
           element={
-            <Layout>
+            <Layout setIsLoggedIn={setIsLoggedIn}>
               <PageWrapper>
                 <AutopsyPage />
               </PageWrapper>
@@ -145,7 +157,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
         <Route
           path="/tod"
           element={
-            <Layout>
+            <Layout setIsLoggedIn={setIsLoggedIn}>
               <PageWrapper>
                 <TODPage />
               </PageWrapper>
@@ -156,7 +168,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
         <Route
           path="/cctv"
           element={
-            <Layout>
+            <Layout setIsLoggedIn={setIsLoggedIn}>
               <PageWrapper>
                 <CCTVPage />
               </PageWrapper>
@@ -167,7 +179,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
         <Route
           path="/evidence"
           element={
-            <Layout>
+            <Layout setIsLoggedIn={setIsLoggedIn}>
               <PageWrapper>
                 <EvidencePage />
               </PageWrapper>
@@ -178,7 +190,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
         <Route
           path="/reconstruction"
           element={
-            <Layout>
+            <Layout setIsLoggedIn={setIsLoggedIn}>
               <PageWrapper>
                 <ReconstructionPage />
               </PageWrapper>
@@ -189,7 +201,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
         <Route
           path="/profile"
           element={
-            <Layout>
+            <Layout setIsLoggedIn={setIsLoggedIn}>
               <PageWrapper>
                 <ProfilePage />
               </PageWrapper>
@@ -200,7 +212,7 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
         <Route
           path="/settings"
           element={
-            <Layout>
+            <Layout setIsLoggedIn={setIsLoggedIn}>
               <PageWrapper>
                 <SettingsPage />
               </PageWrapper>
@@ -220,24 +232,30 @@ function AnimatedRoutes({ isLoggedIn, onLogin }) {
 
 export default function App() {
 
-  // ALWAYS START LOGGED OUT
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [user, setUser] = useState(null);
 
   const handleLogin = (userData) => {
+
+    localStorage.setItem("isLoggedIn", "true");
+
     setIsLoggedIn(true);
+
     setUser(userData);
   };
 
   return (
     <Router>
+
       <DNABackground />
 
       <AnimatedRoutes
         isLoggedIn={isLoggedIn}
         onLogin={handleLogin}
+        setIsLoggedIn={setIsLoggedIn}
       />
+
     </Router>
   );
 }
