@@ -20,6 +20,16 @@ const users = {
     specialization: "Digital Surveillance",
     avatar:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face"
+  },
+  agent99: {
+    name: "Agent 99",
+    rank: "Field Commander",
+    badge: "IQ-9921",
+    division: "Tactical Response Unit",
+    email: "agent99@investiq.gov",
+    specialization: "Tactical Operations",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" 
   }
 
 };
