@@ -59,14 +59,23 @@ export default function LoginPage({ onLogin }) {
         // SAVE LOGIN STATE
         localStorage.setItem("isLoggedIn", "true");
 
-        // SAVE CURRENT USERNAME
-        localStorage.setItem("username", username);
+        // SAVE USER DATA
+        localStorage.setItem(
+          "investiq_user",
+          JSON.stringify(data.user)
+        );
+
+        // SAVE USERNAME
+        localStorage.setItem(
+          "username",
+          username
+        );
 
         setTimeout(() => {
 
           onLogin(data.user);
 
-        }, 1000);
+        }, 800);
 
       } else {
 
@@ -78,7 +87,7 @@ export default function LoginPage({ onLogin }) {
     } catch (err) {
 
       setError(
-        "Connecting securely to InvestIQ backend..."
+        "Unable to connect securely to InvestIQ backend."
       );
 
       setIsAuthenticating(false);
@@ -88,6 +97,7 @@ export default function LoginPage({ onLogin }) {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-6 relative overflow-hidden">
 
+      {/* BACKGROUND */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
 
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#ff003c]/10 via-transparent to-transparent"></div>
@@ -116,7 +126,7 @@ export default function LoginPage({ onLogin }) {
 
         <div className="glass-panel p-8 rounded-3xl border border-white/5 relative shadow-2xl">
 
-          {/* LOGO */}
+          {/* HEADER */}
           <div className="flex flex-col items-center mb-8">
 
             <div className="w-16 h-16 bg-[#ff003c]/10 rounded-2xl flex items-center justify-center mb-4 border border-[#ff003c]/30 shadow-[0_0_20px_rgba(255,0,60,0.2)]">
@@ -130,7 +140,7 @@ export default function LoginPage({ onLogin }) {
             </h1>
 
             <p className="text-[10px] text-[#ff003c] uppercase tracking-[0.3em] font-bold mt-1">
-              InvestIQ Protocol Alpha
+              FORENSIC AI PLATFORM
             </p>
 
           </div>
@@ -152,15 +162,19 @@ export default function LoginPage({ onLogin }) {
 
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
 
-                  <User className="h-4 w-4 text-slate-500 group-focus-within:text-[#ff003c] transition-colors" />
+                  <User className="h-4 w-4 text-slate-500" />
 
                 </div>
 
                 <input
                   type="text"
+
                   required
+
                   placeholder="AGENT_ID"
+
                   value={username}
+
                   onChange={(e) =>
                     setUsername(e.target.value)
                   }
@@ -183,7 +197,7 @@ export default function LoginPage({ onLogin }) {
 
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
 
-                  <Key className="h-4 w-4 text-slate-500 group-focus-within:text-[#ff003c] transition-colors" />
+                  <Key className="h-4 w-4 text-slate-500" />
 
                 </div>
 
@@ -252,7 +266,7 @@ export default function LoginPage({ onLogin }) {
 
                   <Lock className="w-4 h-4" />
 
-                  {error.toUpperCase()}
+                  {error}
 
                 </motion.div>
               )
@@ -262,7 +276,7 @@ export default function LoginPage({ onLogin }) {
             <button
               disabled={isAuthenticating}
 
-              className={`w-full py-4 rounded-xl text-black font-black uppercase tracking-widest text-sm transition-all shadow-[0_0_20px_rgba(255,0,60,0.3)] hover:shadow-[0_0_30px_rgba(255,0,60,0.5)] flex items-center justify-center gap-2
+              className={`w-full py-4 rounded-xl text-black font-black uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-2
               
               ${
                 isAuthenticating

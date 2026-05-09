@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
+ Navigate,
   useLocation
 } from "react-router-dom";
 
@@ -98,7 +98,6 @@ function AnimatedRoutes({
 
   const location = useLocation();
 
-  // LOGIN ROUTES
   if (!isLoggedIn) {
     return (
       <Routes location={location} key="auth">
@@ -117,7 +116,6 @@ function AnimatedRoutes({
     );
   }
 
-  // APP ROUTES
   return (
     <AnimatePresence mode="wait">
 
@@ -232,13 +230,22 @@ function AnimatedRoutes({
 
 export default function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("investiq_user")
+  );
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("investiq_user")) || null
+  );
 
   const handleLogin = (userData) => {
 
     localStorage.setItem("isLoggedIn", "true");
+
+    localStorage.setItem(
+      "investiq_user",
+      JSON.stringify(userData)
+    );
 
     setIsLoggedIn(true);
 
