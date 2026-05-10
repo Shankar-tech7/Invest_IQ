@@ -30,6 +30,16 @@ const users = {
     specialization: "Tactical Operations",
     avatar:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" 
+  },
+  agent01: {
+    name: "Agent 01",
+    rank: "Intelligence Analyst",
+    badge: "IQ-0121",
+    division: "Intelligence Analysis Unit",
+    email: "agent01@investiq.gov",
+    specialization: "Intelligence Gathering",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
   }
 
 };

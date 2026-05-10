@@ -22,6 +22,14 @@ const users = {
       name: "Agent 99",
       rank: "Field Commander"
     }
+  },
+
+  agent01: {
+    password: "satoru_gojo",
+    user: {
+      name: "Agent 01",
+      rank: "Lead Investigator"
+    }
   }
 
 };
