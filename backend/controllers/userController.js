@@ -39,7 +39,7 @@ const users = {
     email: "agent01@investiq.gov",
     specialization: "Intelligence Gathering",
     avatar:
-      "https://www.google.com/imgres?q=satoru%20gojo&imgurl=https%3A%2F%2Fimages4.alphacoders.com%2F133%2Fthumb-1920-1332281.jpeg&imgrefurl=https%3A%2F%2Fwall.alphacoders.com%2Fbig.php%3Fi%3D1332281&docid=BIFyVRuzck8eKM&tbnid=5wbrdASj5orvWM&vet=12ahUKEwiI8Yq9x62UAxWURmwGHWmDFr4QnPAOegQIHxAB..i&w=1920&h=1440&hcb=2&ved=2ahUKEwiI8Yq9x62UAxWURmwGHWmDFr4QnPAOegQIHxAB"
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face"
   }
 
 };
